@@ -18,6 +18,8 @@ class Game:
     def __init__(self):
         # Initialize pygame library
         pygame.init()
+        # Initialize font module
+        pygame.font.init()
         # Create the window
         self.__screen = pygame.display.set_mode((Screen.WIDTH, Screen.HEIGHT))
         # Set window caption
@@ -34,6 +36,7 @@ class Game:
         self.__snakeSprite.fill((255, 255, 255))
         # Score
         self.__score = 0
+        self.__font = pygame.font.SysFont("Courier New", 15)
 
     def __NewPos(self):
         """
@@ -58,13 +61,13 @@ class Game:
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_UP:
+                    if (event.key == pygame.K_UP) and (direction != Direction.DOWN):
                         direction = Direction.UP
-                    if event.key == pygame.K_DOWN:
+                    if (event.key == pygame.K_DOWN) and (direction != Direction.UP):
                         direction = Direction.DOWN
-                    if event.key == pygame.K_LEFT:
+                    if (event.key == pygame.K_LEFT) and (direction != Direction.RIGHT):
                         direction = Direction.LEFT
-                    if event.key == pygame.K_RIGHT:
+                    if (event.key == pygame.K_RIGHT) and (direction != Direction.LEFT):
                         direction = Direction.RIGHT
 
             # Add new element
@@ -86,9 +89,13 @@ class Game:
                 # Remove last element of Snake
                 self.__snake.pop()
 
+            scoreStr = "Score: " + str(self.__score)
+            scoreText = self.__font.render(scoreStr, False, (255, 255, 255))
+
             # Refresh screen
             self.__screen.fill((0, 0, 0))
             self.__screen.blit(self.__apple, self.__applePos)
+            self.__screen.blit(scoreText, (5, 5))
             for pos in self.__snake:
                 self.__screen.blit(self.__snakeSprite, pos)
             # Update the display
