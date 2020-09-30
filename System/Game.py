@@ -32,6 +32,8 @@ class Game:
         self.__snake = [(200, 200), (210, 200), (220, 200)]
         self.__snakeSprite = pygame.Surface((10, 10))
         self.__snakeSprite.fill((255, 255, 255))
+        # Score
+        self.__score = 0
 
     def __NewPos(self):
         """
@@ -65,8 +67,6 @@ class Game:
                     if event.key == pygame.K_RIGHT:
                         direction = Direction.RIGHT
 
-            # Remove last element of Snake
-            self.__snake.pop()
             # Add new element
             self.__snake = [self.__snake[0]] + self.__snake
             if direction == Direction.UP:
@@ -81,6 +81,10 @@ class Game:
             # Detect colision with apple
             if self.__Colision(self.__applePos, self.__snake[0]):
                 self.__applePos = self.__NewPos()
+                self.__score += 1
+            else:
+                # Remove last element of Snake
+                self.__snake.pop()
 
             # Refresh screen
             self.__screen.fill((0, 0, 0))
