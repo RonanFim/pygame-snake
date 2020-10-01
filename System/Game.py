@@ -32,7 +32,9 @@ class Game:
         # Create clock
         self.__clock = pygame.time.Clock()
         # Create the snake
-        self.__snake = [(220, 200), (210, 200), (200, 200)]
+        mWidth = Screen.WIDTH//20 * 10
+        mHeight = Screen.HEIGHT//20 * 10
+        self.__snake = [(mWidth + 20, mHeight), (mWidth + 10, mHeight), (mWidth, mHeight)]
         self.__snakeSprite = pygame.Surface((10, 10))
         self.__snakeSprite.fill((0, 153, 0))
         self.__headSprite = pygame.Surface((10, 10))
@@ -54,34 +56,36 @@ class Game:
         self.__wallSprite.fill((51, 25, 0))
 
     def __OpenWall(self):
-        self.__wall.remove((0, 270))
-        self.__wall.remove((0, 280))
-        self.__wall.remove((0, 290))
-        self.__wall.remove((0, 300))
-        self.__wall.remove((0, 310))
-        self.__wall.remove((0, 320))
-        self.__wall.remove((0, 330))
-        self.__wall.remove((590, 270))
-        self.__wall.remove((590, 280))
-        self.__wall.remove((590, 290))
-        self.__wall.remove((590, 300))
-        self.__wall.remove((590, 310))
-        self.__wall.remove((590, 320))
-        self.__wall.remove((590, 330))
-        self.__wall.remove((270, 0))
-        self.__wall.remove((280, 0))
-        self.__wall.remove((290, 0))
-        self.__wall.remove((300, 0))
-        self.__wall.remove((310, 0))
-        self.__wall.remove((320, 0))
-        self.__wall.remove((330, 0))
-        self.__wall.remove((270, 590))
-        self.__wall.remove((280, 590))
-        self.__wall.remove((290, 590))
-        self.__wall.remove((300, 590))
-        self.__wall.remove((310, 590))
-        self.__wall.remove((320, 590))
-        self.__wall.remove((330, 590))
+        middleWidth = Screen.WIDTH//20 * 10
+        middleHeight = Screen.HEIGHT//20 * 10
+        self.__wall.remove((0, middleHeight - 30))
+        self.__wall.remove((0, middleHeight - 20))
+        self.__wall.remove((0, middleHeight - 10))
+        self.__wall.remove((0, middleHeight))
+        self.__wall.remove((0, middleHeight + 10))
+        self.__wall.remove((0, middleHeight + 20))
+        self.__wall.remove((0, middleHeight + 30))
+        self.__wall.remove((Screen.WIDTH - 10, middleHeight - 30))
+        self.__wall.remove((Screen.WIDTH - 10, middleHeight - 20))
+        self.__wall.remove((Screen.WIDTH - 10, middleHeight - 10))
+        self.__wall.remove((Screen.WIDTH - 10, middleHeight))
+        self.__wall.remove((Screen.WIDTH - 10, middleHeight + 10))
+        self.__wall.remove((Screen.WIDTH - 10, middleHeight + 20))
+        self.__wall.remove((Screen.WIDTH - 10, middleHeight + 30))
+        self.__wall.remove((middleWidth - 30, 0))
+        self.__wall.remove((middleWidth - 20, 0))
+        self.__wall.remove((middleWidth - 10, 0))
+        self.__wall.remove((middleWidth, 0))
+        self.__wall.remove((middleWidth + 10, 0))
+        self.__wall.remove((middleWidth + 20, 0))
+        self.__wall.remove((middleWidth + 30, 0))
+        self.__wall.remove((middleWidth - 30, Screen.HEIGHT - 10))
+        self.__wall.remove((middleWidth - 20, Screen.HEIGHT - 10))
+        self.__wall.remove((middleWidth - 10, Screen.HEIGHT - 10))
+        self.__wall.remove((middleWidth, Screen.HEIGHT - 10))
+        self.__wall.remove((middleWidth + 10, Screen.HEIGHT - 10))
+        self.__wall.remove((middleWidth + 20, Screen.HEIGHT - 10))
+        self.__wall.remove((middleWidth + 30, Screen.HEIGHT - 10))
 
     def __NewPos(self):
         """
