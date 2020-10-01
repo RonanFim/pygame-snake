@@ -49,8 +49,39 @@ class Game:
         for i in range(0, Screen.WIDTH, 10):
             self.__wall.append((0, i))
             self.__wall.append((Screen.HEIGHT - 10, i))
+        self.__OpenWall()
         self.__wallSprite = pygame.Surface((10, 10))
         self.__wallSprite.fill((51, 25, 0))
+
+    def __OpenWall(self):
+        self.__wall.remove((0, 270))
+        self.__wall.remove((0, 280))
+        self.__wall.remove((0, 290))
+        self.__wall.remove((0, 300))
+        self.__wall.remove((0, 310))
+        self.__wall.remove((0, 320))
+        self.__wall.remove((0, 330))
+        self.__wall.remove((590, 270))
+        self.__wall.remove((590, 280))
+        self.__wall.remove((590, 290))
+        self.__wall.remove((590, 300))
+        self.__wall.remove((590, 310))
+        self.__wall.remove((590, 320))
+        self.__wall.remove((590, 330))
+        self.__wall.remove((270, 0))
+        self.__wall.remove((280, 0))
+        self.__wall.remove((290, 0))
+        self.__wall.remove((300, 0))
+        self.__wall.remove((310, 0))
+        self.__wall.remove((320, 0))
+        self.__wall.remove((330, 0))
+        self.__wall.remove((270, 590))
+        self.__wall.remove((280, 590))
+        self.__wall.remove((290, 590))
+        self.__wall.remove((300, 590))
+        self.__wall.remove((310, 590))
+        self.__wall.remove((320, 590))
+        self.__wall.remove((330, 590))
 
     def __NewPos(self):
         """
@@ -103,12 +134,15 @@ class Game:
                     if (event.key == pygame.K_UP):
                         if (direction != Direction.DOWN):
                             direction = Direction.UP
+                        break
                     elif (event.key == pygame.K_DOWN):
                         if (direction != Direction.UP):
                             direction = Direction.DOWN
+                        break
                     elif (event.key == pygame.K_LEFT):
                         if (direction != Direction.RIGHT):
                             direction = Direction.LEFT
+                        break
                     elif (event.key == pygame.K_RIGHT):
                         if (direction != Direction.LEFT):
                             direction = Direction.RIGHT
