@@ -1,6 +1,7 @@
 
 import pygame
 import random
+import time
 from enum import Enum
 
 from definitions import Screen
@@ -31,23 +32,61 @@ class Game:
         # Create clock
         self.__clock = pygame.time.Clock()
         # Create the snake
-        self.__snake = [(200, 200), (210, 200), (220, 200)]
+        self.__snake = [(220, 200), (210, 200), (200, 200)]
         self.__snakeSprite = pygame.Surface((10, 10))
-        self.__snakeSprite.fill((255, 255, 255))
+        self.__snakeSprite.fill((0, 153, 0))
+        self.__headSprite = pygame.Surface((10, 10))
+        self.__headSprite.fill((255, 255, 255))
         # Score
         self.__score = 0
         self.__font = pygame.font.SysFont("Courier New", 15)
+        self.__scorePos = (20, 20)
+        # Create wall
+        self.__wall = []
+        for i in range(0, Screen.HEIGHT, 10):
+            self.__wall.append((i, 0))
+            self.__wall.append((i, Screen.WIDTH - 10))
+        for i in range(0, Screen.WIDTH, 10):
+            self.__wall.append((0, i))
+            self.__wall.append((Screen.HEIGHT - 10, i))
+        self.__wallSprite = pygame.Surface((10, 10))
+        self.__wallSprite.fill((51, 25, 0))
 
     def __NewPos(self):
         """
         Get a random position in the screen in order to spawn the apple.
         """
-        x = random.randint(0, Screen.WIDTH - 10)
-        y = random.randint(0, Screen.HEIGHT - 10)
-        return (x//10 * 10, y//10 * 10)
+        while 42:
+            x = random.randint(0, Screen.WIDTH - 10)
+            y = random.randint(0, Screen.HEIGHT - 10)
+            newPos = (x//10 * 10, y//10 * 10)
+            if (newPos not in self.__wall) and (newPos not in self.__snake):
+                return newPos
 
     def __Colision(self, obj1, obj2):
         return (obj1[0] == obj2[0]) and (obj1[1] == obj2[1])
+
+    def __RefreshPos(self, pos, direction):
+        if direction == Direction.UP:
+            newPos = [pos[0], pos[1] - 10]
+            if newPos[1] < 0:
+                newPos[1] = Screen.HEIGHT - 10
+        elif direction == Direction.DOWN:
+            newPos = [pos[0], pos[1] + 10]
+            if newPos[1] >= Screen.HEIGHT:
+                newPos[1] = 0
+        elif direction == Direction.RIGHT:
+            newPos = [pos[0] + 10, pos[1]]
+            if newPos[0] >= Screen.WIDTH:
+                newPos[0] = 0
+        elif direction == Direction.LEFT:
+            newPos = [pos[0] - 10, pos[1]]
+            if newPos[0] < 0:
+                newPos[0] = Screen.WIDTH - 10
+        else:
+            return pos
+        # Modified position
+        return tuple(newPos)
 
     def Start(self):
         # Run until close the window
@@ -61,25 +100,22 @@ class Game:
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.KEYDOWN:
-                    if (event.key == pygame.K_UP) and (direction != Direction.DOWN):
-                        direction = Direction.UP
-                    if (event.key == pygame.K_DOWN) and (direction != Direction.UP):
-                        direction = Direction.DOWN
-                    if (event.key == pygame.K_LEFT) and (direction != Direction.RIGHT):
-                        direction = Direction.LEFT
-                    if (event.key == pygame.K_RIGHT) and (direction != Direction.LEFT):
-                        direction = Direction.RIGHT
+                    if (event.key == pygame.K_UP):
+                        if (direction != Direction.DOWN):
+                            direction = Direction.UP
+                    elif (event.key == pygame.K_DOWN):
+                        if (direction != Direction.UP):
+                            direction = Direction.DOWN
+                    elif (event.key == pygame.K_LEFT):
+                        if (direction != Direction.RIGHT):
+                            direction = Direction.LEFT
+                    elif (event.key == pygame.K_RIGHT):
+                        if (direction != Direction.LEFT):
+                            direction = Direction.RIGHT
 
             # Add new element
             self.__snake = [self.__snake[0]] + self.__snake
-            if direction == Direction.UP:
-                self.__snake[0] = (self.__snake[0][0], self.__snake[0][1] - 10)
-            elif direction == Direction.DOWN:
-                self.__snake[0] = (self.__snake[0][0], self.__snake[0][1] + 10)
-            elif direction == Direction.RIGHT:
-                self.__snake[0] = (self.__snake[0][0] + 10, self.__snake[0][1])
-            elif direction == Direction.LEFT:
-                self.__snake[0] = (self.__snake[0][0] - 10, self.__snake[0][1])
+            self.__snake[0] = self.__RefreshPos(self.__snake[0], direction)
 
             # Detect colision with apple
             if self.__Colision(self.__applePos, self.__snake[0]):
@@ -89,15 +125,27 @@ class Game:
                 # Remove last element of Snake
                 self.__snake.pop()
 
+            # Detect colision with snake
+            if self.__snake[0] in self.__snake[1:]:
+                time.sleep(3)
+                running = False
+            # Detect colision with wall
+            if self.__snake[0] in self.__wall:
+                time.sleep(3)
+                running = False
+
             scoreStr = "Score: " + str(self.__score)
             scoreText = self.__font.render(scoreStr, False, (255, 255, 255))
 
             # Refresh screen
             self.__screen.fill((0, 0, 0))
             self.__screen.blit(self.__apple, self.__applePos)
-            self.__screen.blit(scoreText, (5, 5))
-            for pos in self.__snake:
+            self.__screen.blit(scoreText, self.__scorePos)
+            self.__screen.blit(self.__headSprite, self.__snake[0])
+            for pos in self.__snake[1:]:
                 self.__screen.blit(self.__snakeSprite, pos)
+            for pos in self.__wall:
+                self.__screen.blit(self.__wallSprite, pos)
             # Update the display
             pygame.display.update()
         # Quit window
