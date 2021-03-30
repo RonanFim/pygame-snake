@@ -126,16 +126,27 @@ class Game:
     def Start(self):
         # Run until close the window
         running = True
+        paused = False
         self.__applePos = self.__NewPos()
         direction = Direction.RIGHT
         while running:
             self.__clock.tick(10)   # 10 fps
-            # The close button was clicked?
+            if paused:
+                for event in pygame.event.get():
+                    if event.type == pygame.KEYDOWN:
+                        # Resume game? (SPACE key)
+                        if event.key == pygame.K_SPACE:
+                            paused = not paused
+                continue
             for event in pygame.event.get():
+                # The close button was clicked?
                 if event.type == pygame.QUIT:
                     running = False
                 if event.type == pygame.KEYDOWN:
-                    if (event.key == pygame.K_UP):
+                    # Pause game? (SPACE key)
+                    if event.key == pygame.K_SPACE:
+                        paused = not paused
+                    elif (event.key == pygame.K_UP):
                         if (direction != Direction.DOWN):
                             direction = Direction.UP
                         break
