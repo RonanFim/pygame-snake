@@ -3,3 +3,16 @@ class Screen():
     WIDTH = 600
     HEIGHT = 600
     CAPTION = 'Snake'
+    BGCOLOR = (0, 0, 0)
+
+BODYCOLOR = (0, 153, 0)
+HEADCOLOR = (255, 255, 255)
+
+APPLECOLOR = (255, 0, 0)
+
+WALLCOLOR = (120, 120, 120)
+
+SCORECOLOR = (255, 255, 255)
+SCOREFONT = "Courier New"
+SCORESIZE = 15
+SCOREPOS = (20, 20)
