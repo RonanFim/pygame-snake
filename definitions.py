@@ -36,3 +36,8 @@ class MenuProp():
     SELECTCOLOR = (0, 255, 0)
     SCREENWIDTH = 400
     SCREENHEIGHT = 500
+
+class GameOverProp():
+    FONTCOLOR = (255, 255, 255)
+    SCREENWIDTH = 400
+    SCREENHEIGHT = 500

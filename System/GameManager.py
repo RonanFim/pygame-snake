@@ -103,3 +103,5 @@ class GameManager:
             # Update the display
             self.__RefreshScreen()
             pygame.display.update()
+    
+        return self.__score.GetScore()
