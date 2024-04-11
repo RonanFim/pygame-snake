@@ -5,7 +5,7 @@ class Score():
 
     def __init__(self) -> None:
         self.__score = 0
-        self.__font = pygame.font.SysFont(SCOREFONT, SCORESIZE)
+        self.__font = pygame.font.SysFont(ScoreProp.FONT, ScoreProp.SIZE)
     
     def GetScore(self) -> int:
         return self.__score
@@ -22,5 +22,5 @@ class Score():
 
     def Draw(self, screen: pygame.Surface):
         scoreStr = "Score: " + str(self.__score)
-        scoreText = self.__font.render(scoreStr, False, SCORECOLOR)
-        screen.blit(scoreText, SCOREPOS)
+        scoreText = self.__font.render(scoreStr, False, ScoreProp.COLOR)
+        screen.blit(scoreText, ScoreProp.POSITION)

@@ -5,7 +5,7 @@ class Apple():
 
     def __init__(self) -> None:
         self.appleSprite = pygame.Surface((10, 10))
-        self.appleSprite.fill(APPLECOLOR)
+        self.appleSprite.fill(AppleProp.COLOR)
         self.__applePos = (0, 0)
     
     def GetApplePos(self) -> tuple:
