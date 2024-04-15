@@ -41,3 +41,11 @@ class GameOverProp():
     FONTCOLOR = (255, 255, 255)
     SCREENWIDTH = 400
     SCREENHEIGHT = 500
+
+class ConfigProp():
+    BGCOLOR = (0, 0, 0)
+    CONFFONTCOLOR = (255, 255, 255)
+    OPTFONTCOLOR = (0, 0, 255)
+    SELFONTCOLOR = (0, 255, 0)
+    SCREENWIDTH = 480
+    SCREENHEIGHT = 400

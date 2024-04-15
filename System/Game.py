@@ -2,6 +2,7 @@ import pygame
 from System.MenuManager import MenuManager
 from System.GameManager import GameManager
 from System.GameOver import GameOver
+from System.ConfigManager import ConfigManager
 from definitions import Screens, GeneralProp
 import time
 
@@ -31,6 +32,9 @@ class Game:
                 over = GameOver(score)
                 over.Run()
                 del(over)
+            elif optSelected == Screens.CONFIG:
+                configs = ConfigManager()
+                configs.Run()
 
         # Quit window
         pygame.quit()
