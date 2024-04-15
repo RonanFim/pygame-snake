@@ -8,12 +8,13 @@ from System.Snake import Snake
 from System.Apple import Apple
 from System.Wall import Wall
 from System.Score import Score
+from System.Configuration import Configuration
 from definitions import GameProp
 
 
 class GameManager:
 
-    def __init__(self):
+    def __init__(self, configs: Configuration):
         # Create the window
         self.__screen = pygame.display.set_mode((GameProp.SCREENWIDTH, GameProp.SCREENHEIGHT))
         # Create elements
