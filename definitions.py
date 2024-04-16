@@ -11,8 +11,6 @@ class Screens(Enum):
     GAME = 4
 
 class GameProp():
-    SCREENWIDTH = 600
-    SCREENHEIGHT = 400
     BGCOLOR = (0, 0, 0)
 
 class SnakeProp():

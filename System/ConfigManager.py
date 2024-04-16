@@ -9,8 +9,8 @@ STARTPOSY = 50
 
 class ConfigManager():
 
-    def __init__(self) -> None:
-        self.__configuration = Configuration()
+    def __init__(self, configs = Configuration()) -> None:
+        self.__configuration = configs
         self.__current = 0
         self.__configs = ["Speed", "Width", "Height", "Wall Style", "EXIT"]
         self.__configPos = [(STARTPOSX,STARTPOSY),

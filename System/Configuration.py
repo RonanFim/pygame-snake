@@ -1,13 +1,13 @@
-from enum import Enum
+from enum import IntEnum
 
 class Configuration():
     
-    class Speed(Enum):
+    class Speed(IntEnum):
         SLOW = 0,
         NORMAL = 1,
         FAST = 2
     
-    class ScreenSize(Enum):
+    class ScreenSize(IntEnum):
         px200 = 200,
         px300 = 300,
         px400 = 400,
@@ -16,7 +16,7 @@ class Configuration():
         px700 = 700,
         px800 = 800
     
-    class WallStyle(Enum):
+    class WallStyle(IntEnum):
         NONE = 0,
         OPEN = 1,
         SOLID = 2
@@ -28,7 +28,8 @@ class Configuration():
         self.wall = self.WallStyle.OPEN
     
     def GetNextValue(self, obj):
-        objLst = list(obj.__class__)
+        objClass = obj.__class__
+        objLst = list(objClass)
         idx = objLst.index(obj)
         if idx >= (len(objLst) - 1):
             return obj
@@ -36,7 +37,8 @@ class Configuration():
             return objLst[idx+1]
 
     def GetPreviousValue(self, obj):
-        objLst = list(obj.__class__)
+        objClass = obj.__class__
+        objLst = list(objClass)
         idx = objLst.index(obj)
         if idx <= 0:
             return obj

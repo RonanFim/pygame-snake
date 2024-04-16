@@ -1,12 +1,15 @@
 from definitions import *
 from System.Direction import Direction
+from System.Configuration import Configuration
 import pygame
 
 class Snake():
 
-    def __init__(self) -> None:
-        posX = GameProp.SCREENWIDTH//20 * 10
-        posY = GameProp.SCREENHEIGHT//20 * 10
+    def __init__(self, configs: Configuration) -> None:
+        self.__screenWidth = configs.width.value
+        self.__screenHeight = configs.height.value
+        posX = self.__screenWidth//20 * 10
+        posY = self.__screenHeight//20 * 10
         self.__snakePos = [(posX + 20, posY), (posX + 10, posY), (posX, posY)]
         self.bodySprite = pygame.Surface((10, 10))
         self.bodySprite.fill(SnakeProp.BODYCOLOR)
@@ -40,19 +43,19 @@ class Snake():
         if direction == Direction.UP:
             newPos = [pos[0], pos[1] - 10]
             if newPos[1] < 0:
-                newPos[1] = GameProp.SCREENHEIGHT - 10
+                newPos[1] = self.__screenHeight - 10
         elif direction == Direction.DOWN:
             newPos = [pos[0], pos[1] + 10]
-            if newPos[1] >= GameProp.SCREENHEIGHT:
+            if newPos[1] >= self.__screenHeight:
                 newPos[1] = 0
         elif direction == Direction.RIGHT:
             newPos = [pos[0] + 10, pos[1]]
-            if newPos[0] >= GameProp.SCREENWIDTH:
+            if newPos[0] >= self.__screenWidth:
                 newPos[0] = 0
         elif direction == Direction.LEFT:
             newPos = [pos[0] - 10, pos[1]]
             if newPos[0] < 0:
-                newPos[0] = GameProp.SCREENWIDTH - 10
+                newPos[0] = self.__screenWidth - 10
         else:
             return pos
         # Modified position

@@ -15,22 +15,23 @@ from definitions import GameProp
 class GameManager:
 
     def __init__(self, configs: Configuration):
+        self.__configs = configs
         # Create the window
-        self.__screen = pygame.display.set_mode((GameProp.SCREENWIDTH, GameProp.SCREENHEIGHT))
+        self.__screen = pygame.display.set_mode((configs.width.value, configs.height.value))
         # Create elements
         self.__clock = pygame.time.Clock()
         self.__apple = Apple()
-        self.__snake = Snake()
+        self.__snake = Snake(configs)
         self.__score = Score()
-        self.__wall = Wall()
+        self.__wall = Wall(configs)
 
     def __NewPos(self):
         """
         Get a random position in the screen in order to spawn the apple.
         """
         while 42:
-            x = random.randint(0, GameProp.SCREENWIDTH - 10)
-            y = random.randint(0, GameProp.SCREENHEIGHT - 10)
+            x = random.randint(0, self.__configs.width.value - 10)
+            y = random.randint(0, self.__configs.height.value - 10)
             newPos = (x//10 * 10, y//10 * 10)
             if not self.__wall.IsColliding([newPos]) and not self.__snake.IsColliding([newPos]):
                 return newPos

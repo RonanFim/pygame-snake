@@ -5,7 +5,6 @@ from System.GameOver import GameOver
 from System.ConfigManager import ConfigManager
 from System.Configuration import Configuration
 from definitions import Screens, GeneralProp
-import time
 
 class Game:
 
@@ -35,7 +34,7 @@ class Game:
                 over.Run()
                 del(over)
             elif optSelected == Screens.CONFIG:
-                configs = ConfigManager()
+                configs = ConfigManager(configuration)
                 configuration = configs.Run()
                 del(configs)
 
