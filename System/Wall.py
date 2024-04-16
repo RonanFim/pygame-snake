@@ -8,13 +8,15 @@ class Wall():
         self.__screenWidth = configs.width.value
         self.__screenHeight = configs.height.value
         self.__wall = []
-        for i in range(0, self.__screenWidth, 10):
-            self.__wall.append((i, 0))
-            self.__wall.append((i, self.__screenHeight - 10))
-        for i in range(0, self.__screenHeight, 10):
-            self.__wall.append((0, i))
-            self.__wall.append((self.__screenWidth - 10, i))
-        self.__OpenWall()
+        if configs.wall != Configuration.WallStyle.NONE:
+            for i in range(0, self.__screenWidth, 10):
+                self.__wall.append((i, 0))
+                self.__wall.append((i, self.__screenHeight - 10))
+            for i in range(0, self.__screenHeight, 10):
+                self.__wall.append((0, i))
+                self.__wall.append((self.__screenWidth - 10, i))
+            if configs.wall == Configuration.WallStyle.OPEN:
+                self.__OpenWall()
         self.wallSprite = pygame.Surface((10, 10))
         self.wallSprite.fill(WallProp.COLOR)
     
