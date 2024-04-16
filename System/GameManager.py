@@ -49,8 +49,10 @@ class GameManager:
         paused = False
         self.__apple.SetApplePos(self.__NewPos())
         direction = Direction.RIGHT
+        counter = 0
         while running:
-            self.__clock.tick(10)   # 10 fps
+            self.__clock.tick(GameProp.FPS)   # fps
+            counter += 1
             if paused:
                 for event in pygame.event.get():
                     if event.type == pygame.KEYDOWN:
@@ -82,25 +84,27 @@ class GameManager:
                         if (direction != Direction.LEFT):
                             direction = Direction.RIGHT
 
-            # Add new element
-            self.__snake.Grow(direction)
+            # Set speed
+            if not(counter % self.__configs.speed.value):
+                # Add new element
+                self.__snake.Grow(direction)
 
-            # Detect colision with apple
-            if self.__snake.IsColliding([self.__apple.GetApplePos()]):
-                self.__apple.SetApplePos(self.__NewPos())
-                self.__score.IncrementScore()
-            else:
-                # Remove last element of Snake
-                self.__snake.RemoveLast()
+                # Detect colision with apple
+                if self.__snake.IsColliding([self.__apple.GetApplePos()]):
+                    self.__apple.SetApplePos(self.__NewPos())
+                    self.__score.IncrementScore()
+                else:
+                    # Remove last element of Snake
+                    self.__snake.RemoveLast()
 
-            # Detect colision with snake
-            if self.__snake.SelfCollision():
-                time.sleep(2)
-                running = False
-            # Detect colision with wall
-            if self.__snake.IsColliding(self.__wall.GetWall()):
-                time.sleep(2)
-                running = False
+                # Detect colision with snake
+                if self.__snake.SelfCollision():
+                    time.sleep(2)
+                    running = False
+                # Detect colision with wall
+                if self.__snake.IsColliding(self.__wall.GetWall()):
+                    time.sleep(2)
+                    running = False
 
             # Update the display
             self.__RefreshScreen()

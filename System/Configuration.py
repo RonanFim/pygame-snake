@@ -2,9 +2,9 @@ from enum import IntEnum
 
 class Configuration():
     
-    class Speed(IntEnum):
-        SLOW = 0,
-        NORMAL = 1,
+    class Speed(IntEnum):   # frames by step
+        SLOW = 4,
+        NORMAL = 3,
         FAST = 2
     
     class ScreenSize(IntEnum):

@@ -12,6 +12,7 @@ class Screens(Enum):
 
 class GameProp():
     BGCOLOR = (0, 0, 0)
+    FPS = 30
 
 class SnakeProp():
     BODYCOLOR = (0, 153, 0)
