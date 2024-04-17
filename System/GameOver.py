@@ -36,6 +36,9 @@ class GameOver():
     def Run(self):
         self.Draw()
         pygame.display.update()
+        # avoid skipping message because of buffer
+        pygame.event.clear(eventtype=[pygame.KEYDOWN, pygame.KEYUP])
+
         while 42:
             self.__clock.tick(10)   # 10 fps
 

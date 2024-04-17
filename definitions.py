@@ -48,3 +48,6 @@ class ConfigProp():
     SELFONTCOLOR = (0, 255, 0)
     SCREENWIDTH = 480
     SCREENHEIGHT = 400
+
+class HighScoresProp():
+    HIGHSCOREFILE = "System/HighScore/HS"
