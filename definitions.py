@@ -51,3 +51,9 @@ class ConfigProp():
 
 class HighScoresProp():
     HIGHSCOREFILE = "System/HighScore/HS"
+    SCREENWIDTH = 700
+    SCREENHEIGHT = 200
+    FONTCOLOR = (255, 255, 255)
+    NAMECOLOR = (255, 255, 0)
+    BGCOLOR = (0, 0, 0)
+    NAMESIZELIM = 19

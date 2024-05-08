@@ -2,6 +2,7 @@ import pygame
 import shelve
 from datetime import datetime
 from System.Configuration import Configuration
+from System.NewHighScore import NewHighScore
 from definitions import HighScoresProp
 
 class HighScoreManager():
@@ -12,12 +13,22 @@ class HighScoreManager():
 
     def SaveScore(self, score):
         scoreFile = shelve.open(HighScoresProp.HIGHSCOREFILE)
-        date = datetime.today()
-        scoreFile[self.__params] = [(score, "Ronan", date),(score, "Paula", date)]
+        try:
+            oldScore = scoreFile[self.__params][0]
+        except KeyError:
+            oldScore = 0
+        if score > oldScore:
+            newHS = NewHighScore()
+            name = newHS.Run()
+            date = datetime.today()
+            scoreFile[self.__params] = (score, name, date)
         scoreFile.close()
     
     def ReadScore(self):
         scoreFile = shelve.open(HighScoresProp.HIGHSCOREFILE)
-        score = scoreFile[self.__params]
+        try:
+            score = scoreFile[self.__params]
+        except KeyError:
+            score = 0
         scoreFile.close()
         return score

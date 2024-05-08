@@ -45,8 +45,7 @@ class Game:
                 highScore = HighScoreManager(configuration)
                 scor = highScore.ReadScore()
                 del(highScore)
-                print(scor[0])
-                print(scor[1])
+                print(scor)
 
         # Quit window
         pygame.quit()
