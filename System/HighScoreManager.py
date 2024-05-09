@@ -14,14 +14,15 @@ class HighScoreManager():
     def SaveScore(self, score):
         scoreFile = shelve.open(HighScoresProp.HIGHSCOREFILE)
         try:
-            oldScore = scoreFile[self.__params][0]
+            oldScore = scoreFile[self.__params]["score"]
         except KeyError:
             oldScore = 0
         if score > oldScore:
             newHS = NewHighScore()
             name = newHS.Run()
             date = datetime.today()
-            scoreFile[self.__params] = (score, name, date)
+            # scoreFile[self.__params] = (score, name, date)
+            scoreFile[self.__params] = {"score": score, "name": name, "date": date}
         scoreFile.close()
     
     def ReadScore(self):
@@ -29,6 +30,6 @@ class HighScoreManager():
         try:
             score = scoreFile[self.__params]
         except KeyError:
-            score = 0
+            score = {"score": 0, "name": "", "date": ""}
         scoreFile.close()
         return score

@@ -4,6 +4,7 @@ from System.GameManager import GameManager
 from System.GameOver import GameOver
 from System.ConfigManager import ConfigManager
 from System.HighScoreManager import HighScoreManager
+from System.HighScoreScreen import HighScoreScreen
 from System.Configuration import Configuration
 from definitions import Screens, GeneralProp
 
@@ -42,10 +43,9 @@ class Game:
                 configuration = configs.Run()
                 del(configs)
             elif optSelected == Screens.HIGHSCORE:
-                highScore = HighScoreManager(configuration)
-                scor = highScore.ReadScore()
+                highScore = HighScoreScreen(configuration)
+                highScore.Run()
                 del(highScore)
-                print(scor)
 
         # Quit window
         pygame.quit()

@@ -15,20 +15,20 @@ NAMETXTPOS = (320,110)
 class NewHighScore():
 
     def __init__(self) -> None:
-        self.__screen = pygame.display.set_mode((HighScoresProp.SCREENWIDTH, HighScoresProp.SCREENHEIGHT))
+        self.__screen = pygame.display.set_mode((HighScoresProp.SaveScreen.SCREENWIDTH, HighScoresProp.SaveScreen.SCREENHEIGHT))
         self.__clock = pygame.time.Clock()
         self.__font = pygame.font.SysFont(NEWFONT, NEWSIZE)
-        self.__TxtNew = self.__font.render("NEW HIGH SCORE!!", False, HighScoresProp.FONTCOLOR)
+        self.__TxtNew = self.__font.render("NEW HIGH SCORE!!", False, HighScoresProp.SaveScreen.FONTCOLOR)
         self.__font = pygame.font.SysFont(ENTERFONT, ENTERSIZE)
-        self.__TxtEnter = self.__font.render("Enter your name:", False, HighScoresProp.FONTCOLOR)
+        self.__TxtEnter = self.__font.render("Enter your name:", False, HighScoresProp.SaveScreen.FONTCOLOR)
         self.__font = pygame.font.SysFont(NAMEFONT, NAMESIZE)
         self.__nameStr = ""
     
     def Draw(self):
-        self.__screen.fill(HighScoresProp.BGCOLOR)
+        self.__screen.fill(HighScoresProp.SaveScreen.BGCOLOR)
         self.__screen.blit(self.__TxtNew, NEWTXTPOS)
         self.__screen.blit(self.__TxtEnter, ENTERTXTPOS)
-        self.__TxtName = self.__font.render(self.__nameStr, False, HighScoresProp.NAMECOLOR)
+        self.__TxtName = self.__font.render(self.__nameStr, False, HighScoresProp.SaveScreen.NAMECOLOR)
         self.__screen.blit(self.__TxtName, NAMETXTPOS)
     
     def Run(self):
@@ -52,7 +52,7 @@ class NewHighScore():
                     else:
                         keyCode = event.key
                         if (keyCode >= 32) and (keyCode <= 126):    # printable char
-                            if len(self.__nameStr) < HighScoresProp.NAMESIZELIM:
+                            if len(self.__nameStr) < HighScoresProp.SaveScreen.NAMESIZELIM:
                                 self.__nameStr += chr(keyCode).upper()
                                 self.Draw()
                                 pygame.display.update()

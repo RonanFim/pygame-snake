@@ -51,9 +51,27 @@ class ConfigProp():
 
 class HighScoresProp():
     HIGHSCOREFILE = "System/HighScore/HS"
-    SCREENWIDTH = 700
-    SCREENHEIGHT = 200
-    FONTCOLOR = (255, 255, 255)
-    NAMECOLOR = (255, 255, 0)
-    BGCOLOR = (0, 0, 0)
-    NAMESIZELIM = 19
+    class SaveScreen():
+        BGCOLOR = (0, 0, 0)
+        SCREENWIDTH = 700
+        SCREENHEIGHT = 200
+        NAMESIZELIM = 10
+        FONTCOLOR = (255, 255, 255)
+        NAMECOLOR = (255, 255, 0)
+    class ReadScreen():
+        BGCOLOR = (0, 0, 0)
+        SCREENWIDTH = 420
+        SCREENHEIGHT = 500
+        CONFIGFONT = "Courier New"
+        CONFIGSIZE = 20
+        CONFIGNAMECOLOR = (255, 255, 255)
+        CONFIGVALUECOLOR = (255, 255, 255)
+        SCOREFONT = "Courier New"
+        SCORESIZE = 150
+        SCORECOLOR = (255, 255, 0)
+        NAMEFONT = "Courier New"
+        NAMESIZE = 50
+        NAMECOLOR = (255, 255, 0)
+        DATEFONT = "Courier New"
+        DATESIZE = 30
+        DATECOLOR = (255, 255, 0)
